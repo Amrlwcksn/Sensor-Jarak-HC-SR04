@@ -1,13 +1,19 @@
 
-int trig = 13;
-int echo = 12;
+int trig = 4;
+int echo = 2;
 long durasi, jarak;
 int merah = 26;
 int kuning =27;
 int hijau = 14;
 int buzzer = 25;
 
+#include <Wire.h>
+#include <Adafruit_SSD1306.h>
+Adafruit_SSD1306 lcd( 128, 32, &Wire, 4);
+
 void setup() {
+  lcd.begin(SSD1306_SWITCHCAPVCC, 0x3c);
+  lcd.clearDisplay();
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
   pinMode(merah,OUTPUT);
@@ -52,6 +58,20 @@ void loop() {
     digitalWrite(buzzer, HIGH);
     delay(200);
   }
+
+   lcd.clearDisplay();
+
+  //jarak
+  lcd.setTextSize(1);
+  lcd.setCursor(0,0);
+  lcd.setTextColor(WHITE);
+  lcd.print("Distance: ");
+  //Parameter jarak
+  lcd.setTextSize(1);
+  lcd.setCursor(55,0);
+  lcd.print(jarak);
+  
+  lcd.display(); 
   // Serial.print("Jarak benda : ");
   // Serial.print(jarak);
   // Serial.print(" cm");
